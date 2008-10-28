@@ -1,0 +1,56 @@
+#summary How the Drum Rocker communicates over USB.
+#labels featured
+
+= Introduction =
+
+All Xbox 360 controllers use a slightly broken form of the HID protocol.  The missing pieces have been reverse-engineered and [http://www.free60.org/wiki/Gamepad documented], and drivers exist to work around these flaws for Windows, Linux, and Mac OS X.  The Ion Drum Rocker behaves like an Xbox 360 controller, but the mapping of drum inputs to HID input report fields is non-intuitive.  This page documents those mappings.
+
+= Background =
+
+_The following information is speculative._
+
+The original protocol for Rock Band Xbox 360 drums maps drum hits to face button presses on a traditional controller (full details coming soon).  The Drum Rocker is intended to be backwards-compatible, so it provides those mappings; however, with the inclusion of cymbals and velocity-sensitive drum pads, much more information needs to be provided.  Cymbal hits need to be treated as identical to pad hits for Rock Band 1's sake, so each pad still maps to a face button as before, but cymbal hits need to be differentiated from pad hits for Rock Band 2, so a mask is set up using buttons that went unused in the Rock Band 1 drum protocol to identify which type of item is being hit.  This limits the Rock Band 2 protocol such that it can only generally support at most two unambiguous hits per input report, but since most drummers only have two arms, this is not a crippling limitation.
+
+= The protocol =
+
+Refer to the reverse-engineered documentation on normal 360 controllers [http://www.free60.org/wiki/Gamepad here].
+
+{{{
+Byte  Mask    Function
+00    00    # Protocol ID. Does not change.
+01    14    # Packet size. Does not change.
+02    01    # D-Pad up / Resolve to yellow cymbal[1].
+02    02    # D-Pad down / Resolve to blue cymbal.
+02    04    # D-Pad left.
+02    08    # D-Pad right.
+02    10    # Start button.
+02    20    # Back button.
+02    40    # Pedal connected.
+02    80    # At least one drum pad hit.
+03    01    # Pedal depressed.
+03    02    # At least one cymbal hit.
+03    10    # Green pad / Green cymbal / 'A' button.
+03    20    # Red pad / 'B' button.
+03    40    # Blue pad / Blue cymbal / 'X' button.
+03    80    # Yellow pad / Yellow cymbal / 'Y' button.
+04    00    # Left trigger. Unused.
+05    00    # Right trigger. Unused.
+06    ??    # Noise[2].
+07    ff    # Red pad / extra slot[3].  Inverted[4].
+08    ??    # Noise.
+09    ff    # Yellow pad / Yellow cymbal.
+0a    ??    # Noise.
+0b    ff    # Blue pad / Blue cymbal. Inverted.
+0c    ??    # Noise.
+0d    ff    # Green pad / Green cymbal.
+0e-13 00    # Unused.
+}}}
+
+== Notes ==
+
+ # *Resolve:*  When this is set and there is an ambiguity about which color is the cymbal, resolve as above.  If unset, resolve to green cymbal.
+ # *Noise:*  These are the least-significant bytes of their respective axes, and as such could just be reporting noise from the long analog cable runs to the drum pads.  However, the bytes usually take on only certain values which differ for each position, and remain fixed throughout much of a given note's duration.  I'm still investigating these.
+ # *Extra slot:* When both cymbal and pad of a given color are hit simultaneously, this value stores the velocity information of the cymbal.  I think.
+ # *Inverted:* Value is subtractive: at rest, it's 0xff, and maximum intensity is 0x00.
+
+_More detail soon._
