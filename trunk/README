@@ -1,0 +1,14 @@
+This code currently just decodes the ION Drum Rockers.  See:
+
+http://code.google.com/p/drumroller/
+
+for info.  Until next time, you can experiment by building it yourself.
+Make sure libusb-0.1 is installed, then compile with
+
+gcc -lusb usb.c -o drumroller-test
+
+and run
+
+./drumroller-test
+
+to see some crappy output.
