@@ -20,7 +20,7 @@ The current version fixes drum events to MIDI events (in a sensible way, but sti
 
 === Velocity curves ===
 
-I don't know if the default velocity curve is sensible, but in case it's not, this'll be here for you.
+The hardware-provided velocity curve is rather useless. I'll try and map it to something more sensible, but it doesn't look like there's a lot of variability to work with.
 
 === Windows? ===
 
