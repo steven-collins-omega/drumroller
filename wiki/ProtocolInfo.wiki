@@ -53,4 +53,353 @@ Byte  Mask    Function
  # *Extra slot:* When both cymbal and pad of a given color are hit simultaneously, this value stores the velocity information of the cymbal.  I think.
  # *Inverted:* Value is subtractive: at rest, it's 0xff, and maximum intensity is 0x00.
 
-_More detail soon._
+= A dump =
+
+This is quick, noisy, and not necessarily correct. I think some of the samples are just flat-out wrong, but I can't tell if it's human error or noise yet. I'll update it soon with more detail as I work out all the kinks in the driver's noise filters.
+
+{{{
+ Kick
+20 00144001 0000b9ff 8c00b9ff 8c000000 00000000
+KICK
+RED_VEL: 0
+YEL_VEL: 0
+BLU_VEL: 0
+GRN_VEL: 0
+
+ Red pad
+20 0014c020 00005232 8c00b9ff d2000000 00000000
+PAD
+RED
+RED_VEL: 205
+YEL_VEL: 0
+BLU_VEL: 0
+GRN_VEL: 0
+
+ Yellow pad
+20 0014c080 0000b9ff 4ca6b9ff 8c000000 00000000
+PAD
+YEL
+RED_VEL: 0
+YEL_VEL: 166
+BLU_VEL: 0
+GRN_VEL: 0
+
+ Blue pad
+20 0014c040 0000b9ff 8c005232 46000000 00000000
+PAD
+BLU
+RED_VEL: 0
+YEL_VEL: 0
+BLU_VEL: 205
+GRN_VEL: 0
+
+ Green pad
+20 0014c010 0000b9ff 8c000000 73bc0000 00000000
+PAD
+GRN
+RED_VEL: 0
+YEL_VEL: 0
+BLU_VEL: 255
+GRN_VEL: 188
+
+ Red and yellow pad
+20 0014c0a0 00005232 a4e1b9ff 8c000000 00000000
+PAD
+RED
+YEL
+RED_VEL: 205
+YEL_VEL: 225
+BLU_VEL: 0
+GRN_VEL: 0
+
+ Red and blue pad
+20 0014c060 0000f959 4600a11e 8c000000 00000000
+PAD
+RED
+BLU
+RED_VEL: 166
+YEL_VEL: 0
+BLU_VEL: 225
+GRN_VEL: 0
+
+ Red and green
+20 0014c030 00005232 8c00b9ff a4e10000 00000000
+PAD
+GRN
+RED
+RED_VEL: 205
+YEL_VEL: 0
+BLU_VEL: 0
+GRN_VEL: 225
+
+ Yellow and blue
+20 0014c080 0000b9ff 008073ff 8c000000 00000000
+PAD
+YEL
+RED_VEL: 0
+YEL_VEL: 128
+BLU_VEL: 0
+GRN_VEL: 0
+
+ Yellow and green
+20 0014c080 0000b9ff 008073ff 8c000000 00000000
+PAD
+YEL
+RED_VEL: 0
+YEL_VEL: 128
+BLU_VEL: 0
+GRN_VEL: 0
+
+ Yellow and green
+20 0014c080 00000000 008073ff 8c000000 00000000
+PAD
+YEL
+RED_VEL: 255
+YEL_VEL: 128
+BLU_VEL: 0
+GRN_VEL: 0
+
+ Yellow and green
+20 0014c090 000073ff a4e1b9ff f3cd0000 00000000
+PAD
+GRN
+YEL
+RED_VEL: 0
+YEL_VEL: 225
+BLU_VEL: 0
+GRN_VEL: 205
+
+ Blue and green
+20 0014c050 000073ff d2005232 2dbc0000 00000000
+PAD
+GRN
+BLU
+RED_VEL: 0
+YEL_VEL: 0
+BLU_VEL: 205
+GRN_VEL: 188
+
+Yellow cym and... Yellow cym and
+Yellow cym and 0
+20 00144182 000073ff a4e1b9ff 46000000 00000000
+CYM
+YEL
+YEL_RESOLV
+RED_VEL: 0
+YEL_VEL: 225
+BLU_VEL: 0
+GRN_VEL: 0
+
+Yellow cym and red pad
+20 0014c1a2 00009832 eae1b9ff 8c000000 00000000
+PAD
+CYM
+RED
+YEL
+YEL_RESOLV
+RED_VEL: 205
+YEL_VEL: 225
+BLU_VEL: 0
+GRN_VEL: 0
+
+Yellow cym and yellow pad
+20 0014c182 00009832 a4e1b9ff 8c000000 00000000
+PAD
+CYM
+YEL
+YEL_RESOLV
+RED_VEL: 205
+YEL_VEL: 225
+BLU_VEL: 0
+GRN_VEL: 0
+
+Yellow cym and blue pad
+20 0014c1c2 00000000 eae15232 8c000000 00000000
+PAD
+CYM
+BLU
+YEL
+YEL_RESOLV
+RED_VEL: 255
+YEL_VEL: 225
+BLU_VEL: 205
+GRN_VEL: 0
+
+Yellow cym and green pad
+20 0014c192 0000b9ff eae1b9ff eae10000 00000000
+PAD
+CYM
+GRN
+YEL
+YEL_RESOLV
+RED_VEL: 0
+YEL_VEL: 225
+BLU_VEL: 0
+GRN_VEL: 225
+
+Yellow cym and blue cym
+20 001441c2 000073ff a4e1a11e d2000000 00000000
+CYM
+BLU
+YEL
+YEL_RESOLV
+RED_VEL: 0
+YEL_VEL: 225
+BLU_VEL: 225
+GRN_VEL: 0
+
+Yellow cym and green cym
+20 00144192 000073ff a4e173ff eae10000 00000000
+CYM
+GRN
+YEL
+YEL_RESOLV
+RED_VEL: 0
+YEL_VEL: 225
+BLU_VEL: 0
+GRN_VEL: 225
+
+Blue cym and... Blue cym and
+Blue cym and nothing else
+20 00144242 0000b9ff d2005b1e d2000000 00000000
+CYM
+BLU
+BLU_RESOLV
+RED_VEL: 0
+YEL_VEL: 0
+BLU_VEL: 225
+GRN_VEL: 0
+
+Blue cym and red pad
+20 0014c262 00001844 8c00a11e d2000000 00000000
+PAD
+CYM
+RED
+BLU
+BLU_RESOLV
+RED_VEL: 187
+YEL_VEL: 0
+BLU_VEL: 225
+GRN_VEL: 0
+
+Blue cym and yellow pad
+20 0014c2c2 0000b9ff eae15b1e 8c000000 00000000
+PAD
+CYM
+BLU
+YEL
+BLU_RESOLV
+RED_VEL: 0
+YEL_VEL: 225
+BLU_VEL: 225
+GRN_VEL: 0
+
+Blue cym and yellow pad
+20 0014c2c2 00000000 eae1a11e 8c000000 00000000
+PAD
+CYM
+BLU
+YEL
+BLU_RESOLV
+RED_VEL: 255
+YEL_VEL: 225
+BLU_VEL: 225
+GRN_VEL: 0
+
+Blue cym and blue pad
+20 0014c242 0000a11e 8c00f959 8c000000 00000000
+PAD
+CYM
+BLU
+BLU_RESOLV
+RED_VEL: 225
+YEL_VEL: 0
+BLU_VEL: 166
+GRN_VEL: 0
+
+Blue cym and green pad
+20 0014c252 000073ff 8c00a11e a4e10000 00000000
+PAD
+CYM
+GRN
+BLU
+BLU_RESOLV
+RED_VEL: 0
+YEL_VEL: 0
+BLU_VEL: 225
+GRN_VEL: 225
+
+Green cym and... Green cym and
+Green cym and nothing
+20 00144012 0000b9ff 8c00b9ff eae10000 00000000
+CYM
+GRN
+RED_VEL: 0
+YEL_VEL: 0
+BLU_VEL: 0
+GRN_VEL: 225
+
+Green cym and red pad
+20 0014c032 00005b1e 8c00b9ff eae10000 00000000
+PAD
+CYM
+GRN
+RED
+RED_VEL: 225
+YEL_VEL: 0
+BLU_VEL: 0
+GRN_VEL: 225
+
+Green cym and yellow pad
+20 0014c092 0000b9ff a4e1b9ff a4e10000 00000000
+PAD
+CYM
+GRN
+YEL
+RED_VEL: 0
+YEL_VEL: 225
+BLU_VEL: 0
+GRN_VEL: 225
+
+Green cym and yellow pad
+20 0014c092 0000b9ff a4e1b9ff a4e10000 00000000
+PAD
+CYM
+GRN
+YEL
+RED_VEL: 0
+YEL_VEL: 225
+BLU_VEL: 0
+GRN_VEL: 225
+
+Green cym and blue pad
+20 0014c052 00000000 8c001844 eae10000 00000000
+PAD
+CYM
+GRN
+BLU
+RED_VEL: 255
+YEL_VEL: 0
+BLU_VEL: 187
+GRN_VEL: 225
+
+Green cym and green pad
+20 0014c012 0000f959 8c00b9ff eae10000 00000000
+PAD
+CYM
+GRN
+RED_VEL: 166
+YEL_VEL: 0
+BLU_VEL: 0
+GRN_VEL: 225
+
+Green cym and blue cym
+20 00144052 0000b9ff 46005b1e a4e10000 00000000
+CYM
+GRN
+BLU
+RED_VEL: 0
+YEL_VEL: 0
+BLU_VEL: 225
+GRN_VEL: 225
+}}}
